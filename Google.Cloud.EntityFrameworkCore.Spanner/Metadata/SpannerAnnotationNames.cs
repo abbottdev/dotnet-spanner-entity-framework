@@ -21,27 +21,32 @@ namespace Google.Cloud.EntityFrameworkCore.Spanner.Metadata
         /// commit timestamp of the transaction. 
         /// </summary>
         public const string UpdateCommitTimestamp = "UpdateCommitTimestamp";
-        
+
         /// <summary>
         /// Use this annotation for tables that should be interleaved in another table.
         /// </summary>
         public const string InterleaveInParent = "Spanner:InterleaveInParent";
-        
+
         /// <summary>
         /// Annotation for setting the action to take for child records when a parent record
         /// is deleted.
         /// </summary>
         public const string InterleaveInParentOnDelete = "Spanner:InterleaveInParentOnDelete";
-        
+
         /// <summary>
         /// Annotation for creating null-filtered indexes.
         /// </summary>
         public const string IsNullFilteredIndex = "Spanner:IsNullFiltered";
-        
+
         /// <summary>
         /// Annotation for adding STORING columns to an index.
         /// </summary>
         public const string Storing = "Spanner:Storing";
+
+        /// <summary>
+        /// Annotation for adding options columns to an index.
+        /// </summary>
+        public const string IndexOptions = "Spanner:IndexOptions";
     }
 
     public enum SpannerUpdateCommitTimestamp

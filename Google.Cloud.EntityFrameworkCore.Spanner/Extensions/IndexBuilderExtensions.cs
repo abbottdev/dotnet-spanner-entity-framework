@@ -15,9 +15,9 @@
 using Google.Cloud.EntityFrameworkCore.Spanner.Metadata;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -52,6 +52,24 @@ namespace Google.Cloud.EntityFrameworkCore.Spanner.Extensions
         {
             indexBuilder.Metadata.AddAnnotation(SpannerAnnotationNames.Storing,
                 storingPropertiesExpression.GetPropertyAccessList().Select(c => c.Name).ToArray());
+            return indexBuilder;
+        }
+
+
+        /// <summary>
+        /// Marks an index as STORING one or more additional columns.
+        /// </summary>
+        /// <param name="indexBuilder">The builder for the index to modify</param>
+        /// <param name="storingPropertiesExpression">An expression that should return an array of properties that
+        /// should be stored by the index.</param>
+        /// <typeparam name="TEntity">The entity type that contains the index</typeparam>
+        /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
+        public static IndexBuilder<TEntity> Options<TEntity>(
+            this IndexBuilder<TEntity> indexBuilder,
+            Dictionary<string, string> options)
+            where TEntity : class
+        {
+            indexBuilder.Metadata.SetAnnotation(SpannerAnnotationNames.IndexOptions, options);
             return indexBuilder;
         }
     }

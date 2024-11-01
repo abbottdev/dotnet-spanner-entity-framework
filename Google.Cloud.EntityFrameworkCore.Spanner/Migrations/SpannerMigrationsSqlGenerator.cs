@@ -138,6 +138,38 @@ namespace Google.Cloud.EntityFrameworkCore.Spanner.Migrations
                 .Append(ColumnList(operation.Columns))
                 .Append(")");
 
+            if (operation.Filter != null)
+            {
+                builder.AppendLine("WHERE ")
+                    .Append(operation.Filter)
+                    .AppendLine();
+            }
+
+            if (operation[SpannerAnnotationNames.IndexOptions] is Dictionary<string, string> indexOptions
+                && indexOptions.Values.Count > 0)
+            {
+                builder
+                    .AppendLine(" OPTIONS (");
+                    
+                using (builder.Indent())
+                {
+                    var index = 0;
+
+                    foreach (var (key, value) in indexOptions)
+                    {
+                        if (index > 0)
+                        {
+                            builder.AppendLine(", ");
+                        }
+                        builder.Append($"{key} = {value}");
+                        index++;
+                    }
+                }
+                builder
+                    .AppendLine()
+                    .Append(") ");
+            }
+
             if (operation[SpannerAnnotationNames.Storing] is string[] storingColumns
                             && storingColumns.Length > 0)
             {
@@ -270,7 +302,7 @@ namespace Google.Cloud.EntityFrameworkCore.Spanner.Migrations
                 }
             }
 
-            builder.Append(")");
+            builder.Append(") ");
             if (operation.PrimaryKey != null)
             {
                 PrimaryKeyConstraint(operation.PrimaryKey, model, builder);

@@ -1,4 +1,4 @@
-﻿// Copyright 2022, Google Inc. All rights reserved.
+// Copyright 2022, Google Inc. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -88,6 +88,12 @@ namespace Google.Cloud.EntityFrameworkCore.Spanner.Migrations.Internal
                 if (storingIndexAnnotation != null)
                 {
                     indexAnnotations = indexAnnotations.Concat(new[] { storingIndexAnnotation });
+                }
+
+                var indexOptionIndexAnnotation = mapping.FindAnnotation(SpannerAnnotationNames.IndexOptions);
+                if (indexOptionIndexAnnotation != null)
+                {
+                    indexAnnotations = indexAnnotations.Concat(new[] { indexOptionIndexAnnotation });
                 }
             }
 
