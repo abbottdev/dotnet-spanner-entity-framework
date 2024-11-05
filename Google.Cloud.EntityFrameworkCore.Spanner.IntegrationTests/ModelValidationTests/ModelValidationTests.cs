@@ -87,6 +87,11 @@ namespace Google.Cloud.EntityFrameworkCore.Spanner.IntegrationTests.ModelValidat
                     SingerId = singerId,
                     AlbumId = albumId1,
                     Title = $"Random title {albumId1}",
+                    Awards = new System.Collections.Generic.HashSet<string>
+                    {
+                        "Grammy",
+                        "RIAA Gold & Platinum"
+                    }
                 },
                 new Album
                 {

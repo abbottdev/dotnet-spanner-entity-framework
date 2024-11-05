@@ -30,6 +30,7 @@ CREATE TABLE Albums (
   Title       STRING(100) NOT NULL,
   ReleaseDate DATE,
   SingerId    STRING(36) NOT NULL,
+  Awards ARRAY<STRING(256)> NOT NULL,
   Version     INT64 NOT NULL,
   CONSTRAINT FK_Albums_Singers FOREIGN KEY (SingerId) REFERENCES Singers (SingerId),
 ) PRIMARY KEY (AlbumId);

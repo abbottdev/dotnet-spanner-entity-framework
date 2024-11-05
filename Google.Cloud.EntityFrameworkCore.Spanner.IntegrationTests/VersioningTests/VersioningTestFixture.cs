@@ -89,6 +89,7 @@ namespace Google.Cloud.EntityFrameworkCore.Spanner.IntegrationTests
                     SingerId INT64,
                     AlbumId INT64,
                     Title STRING(MAX),
+                    Awards ARRAY<STRING(256)>,
                     Version INT64,
                  ) PRIMARY KEY (SingerId, AlbumId),
                  INTERLEAVE IN PARENT SingersWithVersion ON DELETE CASCADE"

@@ -32,6 +32,7 @@ namespace Google.Cloud.EntityFrameworkCore.Spanner.Tests.Migrations
     `Title` STRING(MAX) NOT NULL,
     `ReleaseDate` DATE,
     `SingerId` INT64 NOT NULL,
+    `Awards` ARRAY<STRING(256)> NOT NULL,
  CONSTRAINT `FK_Albums_Singers` FOREIGN KEY (`SingerId`) REFERENCES `Singers` (`SingerId`),
 CONSTRAINT `Chk_Title_Length_Equal` CHECK (CHARACTER_LENGTH(Title) > 0),
 )PRIMARY KEY (`AlbumId`)");

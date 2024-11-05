@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Linq;
 using Google.Cloud.EntityFrameworkCore.Spanner.Extensions;
 using Google.Cloud.EntityFrameworkCore.Spanner.Metadata;
 using Google.Cloud.Spanner.Common.V1;
@@ -41,6 +42,12 @@ namespace Google.Cloud.EntityFrameworkCore.Spanner.IntegrationTests.ModelValidat
                 entity
                     .InterleaveInParent(typeof(Singer), OnDelete.Cascade)
                     .HasKey(entity => new { entity.SingerId, entity.AlbumId });
+
+                entity.Property(a => a.Awards)
+                    .HasConversion(
+                        hashset => hashset.ToList(),
+                        list => list.ToHashSet()
+                    );
             });
         }
 

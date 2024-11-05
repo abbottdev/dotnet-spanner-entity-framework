@@ -85,6 +85,7 @@ namespace Google.Cloud.EntityFrameworkCore.Spanner.IntegrationTests.ShadowProper
                     AlbumId INT64,
                     Title STRING(MAX),
                     SingerId INT64,
+                    Awards ARRAY<STRING(256)>,
                     LastModified TIMESTAMP OPTIONS (allow_commit_timestamp = true),
                     CONSTRAINT FK_Albums_Singers FOREIGN KEY (SingerId) REFERENCES Singers (SingerId),
                  ) PRIMARY KEY (AlbumId)"

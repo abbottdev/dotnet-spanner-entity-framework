@@ -91,6 +91,7 @@ namespace Google.Cloud.EntityFrameworkCore.Spanner.IntegrationTests.InheritanceT
                     AlbumId INT64,
                     SingerPersonId INT64,
                     Title STRING(MAX),
+                    Awards ARRAY<STRING(256)>,
                     CONSTRAINT FK_Albums_Singer FOREIGN KEY (SingerPersonId) REFERENCES Persons (PersonId),
                  ) PRIMARY KEY (AlbumId)"
             ).ExecuteNonQuery();

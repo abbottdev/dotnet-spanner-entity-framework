@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Linq;
 using Google.Cloud.EntityFrameworkCore.Spanner.Metadata;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -50,6 +51,10 @@ namespace Google.Cloud.EntityFrameworkCore.Spanner.IntegrationTests.Model
                 entity.Property(e => e.Title)
                     .IsRequired()
                     .HasMaxLength(100);
+
+                entity.Property(p => p.Awards)
+                    .HasConversion(hs => hs.ToList(),
+                        ls => ls.ToHashSet());
 
                 entity.HasOne(d => d.Singer)
                     .WithMany(p => p.Albums)

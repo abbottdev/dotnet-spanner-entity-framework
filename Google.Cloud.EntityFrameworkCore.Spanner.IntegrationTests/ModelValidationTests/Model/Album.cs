@@ -12,6 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
+using System.Collections.Generic;
+
 namespace Google.Cloud.EntityFrameworkCore.Spanner.IntegrationTests.ModelValidationTests
 {
     public partial class Album
@@ -20,5 +23,6 @@ namespace Google.Cloud.EntityFrameworkCore.Spanner.IntegrationTests.ModelValidat
         public long AlbumId { get; set; }
         public string Title { get; set; }
         public virtual Singer Singer { get; set; }
+        public HashSet<string> Awards { get; set; } = new HashSet<string>();
     }
 }

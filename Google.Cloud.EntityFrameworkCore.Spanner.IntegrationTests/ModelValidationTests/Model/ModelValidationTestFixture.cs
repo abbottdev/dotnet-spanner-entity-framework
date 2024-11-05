@@ -60,6 +60,7 @@ namespace Google.Cloud.EntityFrameworkCore.Spanner.IntegrationTests.ModelValidat
                     SingerId INT64,
                     AlbumId INT64,
                     Title STRING(MAX),
+                    Awards ARRAY<STRING(256)>,
                  ) PRIMARY KEY (SingerId, AlbumId),
                  INTERLEAVE IN PARENT Singers ON DELETE CASCADE",
                 @"CREATE UNIQUE INDEX Idx_Albums_SingerTitle ON Albums (SingerId, Title)"
